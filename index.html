@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* NAVBAR */
         .navbar {
             background: rgba(15, 36, 64, 0.95);
             backdrop-filter: blur(20px);
@@ -64,7 +63,6 @@
 
         .nav-links a:hover { color: var(--cyan); }
 
-        /* HERO AVEC LOGO */
         .hero {
             background: linear-gradient(135deg, #0f2440 0%, #1a365d 50%, #0f2440 100%);
             color: var(--white);
@@ -160,7 +158,6 @@
             z-index: 10;
         }
 
-        /* CONTAINER */
         .container {
             max-width: 1000px;
             margin: -30px auto 60px;
@@ -219,6 +216,40 @@
         }
 
         .card .link:hover {
+            color: var(--cyan);
+        }
+
+        .contact {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 15px;
+        }
+
+        .contact p {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 15px;
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        .contact-email {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            color: var(--cyan-dark);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-email:hover {
             color: var(--cyan);
         }
 
@@ -286,6 +317,12 @@
             </div>
         </div>
     </div>
+
+    <section class="contact" id="contact">
+        <h2>Contact</h2>
+        <p>Une question ? Écrivez-nous :</p>
+        <a href="mailto:debitlog@proton.me" class="contact-email">📧 debitlog@proton.me</a>
+    </section>
 
     <footer>
         © 2026 <strong>DEBITLOG</strong> — Solutions de gestion financière | Alger, Algérie
