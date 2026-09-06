@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEBITLOG - Solutions de Gestion Financière</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0f2440;
+            --navy-light: #1a365d;
+            --cyan: #00d4ff;
+            --cyan-dark: #0098cc;
+            --gold: #d4af37;
+            --gold-light: #f4e4b8;
+            --white: #ffffff;
+            --off-white: #f8fafc;
+            --gray: #64748b;
+            --green: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--off-white);
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: rgba(15, 36, 64, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0 40px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--cyan);
+        }
+
+        .brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--cyan);
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--cyan); }
+
+        /* HERO AVEC LOGO */
+        .hero {
+            background: linear-gradient(135deg, #0f2440 0%, #1a365d 50%, #0f2440 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 120px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: auto, auto, 50px 50px, 50px 50px;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '{ } </> € $ £ API';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 100px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.04);
+            letter-spacing: 20px;
+            pointer-events: none;
+            font-family: 'Consolas', 'Courier New', monospace;
+            white-space: nowrap;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 30px;
+        }
+
+        .accolade {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 70px;
+            font-weight: 400;
+            color: var(--cyan);
+            text-shadow: 
+                0 0 10px rgba(0, 212, 255, 0.8),
+                0 0 20px rgba(0, 212, 255, 0.5),
+                0 0 40px rgba(0, 212, 255, 0.3);
+            line-height: 1;
+        }
+
+        .logo-text {
+            text-align: center;
+        }
+
+        .debitlog {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 40px;
+            font-weight: 600;
+            letter-spacing: 10px;
+            color: var(--cyan);
+            text-shadow: 
+                0 0 10px rgba(0, 212, 255, 0.8),
+                0 0 20px rgba(0, 212, 255, 0.5);
+            margin: 0;
+        }
+
+        .sous-titre {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 12px;
+            letter-spacing: 12px;
+            color: var(--cyan-dark);
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: #b0bec5;
+            max-width: 550px;
+            margin: 20px auto 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1000px;
+            margin: -30px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(15, 36, 64, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid var(--cyan);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(15, 36, 64, 0.2);
+        }
+
+        .card .icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .card .link {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--cyan-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .card .link:hover {
+            color: var(--cyan);
+        }
+
+        footer {
+            background: var(--navy);
+            color: #94a3b8;
+            text-align: center;
+            padding: 30px;
+            font-size: 12px;
+            border-top: 3px solid var(--cyan);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        footer strong { color: var(--cyan); font-family: 'Poppins', sans-serif; }
+
+        @media (max-width: 768px) {
+            .debitlog { font-size: 24px; letter-spacing: 5px; }
+            .accolade { font-size: 50px; }
+            .navbar { padding: 0 20px; }
+            .nav-links a { margin-left: 15px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">DEBITLOG</div>
+        <div class="nav-links">
+            <a href="#">Accueil</a>
+            <a href="#solutions">Solutions</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="logo-container">
+            <div class="accolade">{</div>
+            <div class="logo-text">
+                <div class="debitlog">DEBITLOG</div>
+                <div class="sous-titre">SOLUTIONS DE GESTION</div>
+            </div>
+            <div class="accolade">}</div>
+        </div>
+        <p>Solutions de gestion financière intelligentes<br>pour les entreprises modernes</p>
+    </section>
+
+    <div class="container" id="solutions">
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🏦</div>
+                <h3>Audit des Agios Bancaires</h3>
+                <p>Détectez automatiquement les erreurs de facturation de votre banque : intérêts, commissions, frais cachés.</p>
+                <a href="https://sofdev-api.onrender.com" class="link" target="_blank">Accéder →</a>
+            </div>
+            <div class="card">
+                <div class="icon">📊</div>
+                <h3>Contrôle FEC</h3>
+                <p>Analysez vos Fichiers des Écritures Comptables et détectez les anomalies en 30 secondes.</p>
+                <a href="https://fecontrol.onrender.com" class="link" target="_blank">Accéder →</a>
+            </div>
+            <div class="card">
+                <div class="icon">📋</div>
+                <h3>Lettrage des Tiers</h3>
+                <p>Lettrez automatiquement vos comptes clients et fournisseurs avec un moteur intelligent.</p>
+                <a href="#" class="link">Bientôt disponible</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 <strong>DEBITLOG</strong> — Solutions de gestion financière | Alger, Algérie
+    </footer>
+</body>
+</html>
