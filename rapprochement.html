@@ -300,6 +300,21 @@
             background: #1a2a3a;
             transform: translateY(-2px);
         }
+        .confidentialite {
+            margin-top: 25px;
+            padding: 15px 25px;
+            background: #f0f9ff;
+            border-left: 4px solid #f59e0b;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #0b1e33;
+            text-align: left;
+            display: block;
+        }
+
+        .confidentialite strong {
+            color: #b45309;
+        }
         @media (max-width: 640px) {
             .card { padding: 24px 16px 28px; }
             .header { margin: -24px -16px 20px -16px; padding: 20px 16px 18px; }
@@ -370,9 +385,13 @@
                     <tbody id="tableBody"></tbody>
                 </table>
             </div>
-            <div id="messageBox" style="margin-top:16px;padding:14px 20px;border-radius:12px;font-weight:600;display:none;"></div>
-            <button class="btn-export" id="exportBtn">Télécharger le rapport Excel</button>
+                    <div id="messageBox" style="margin-top:16px;padding:14px 20px;border-radius:12px;font-weight:600;display:none;"></div>
+        <button class="btn-export" id="exportBtn">Télécharger le rapport Excel</button>
+
+        <div class="confidentialite">
+            🔒 <strong>Confidentialité garantie</strong> — Vos fichiers sont traités en mémoire et ne sont <strong>jamais sauvegardés</strong> sur nos serveurs.
         </div>
+    </div>
 
         <div class="footer">
             <span>© 2026 <strong>SofDev</strong> — Propulsé par DEBITLOG</span>
