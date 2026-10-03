@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEBITLOG — Outils d'audit comptable 10x plus rapides que les outils traditionnels</title>
     <meta name="description" content="Outils d'audit comptable 10x plus rapides que les outils traditionnels. FEC, échelles d'agios débiteurs, lettrage des tiers, rapprochement bancaire. Pensé pour les métiers de la comptabilité et de la finance.">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -41,16 +44,16 @@
 
         /* === HEADER === */
         .header {
-            background: var(--dark);
+            background: var(--white);
             padding: 0 40px;
-            height: 70px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid var(--border);
         }
 
         .logo {
@@ -59,8 +62,14 @@
             text-decoration: none;
         }
 
+        .logo img {
+            height: 56px;
+            width: auto;
+            display: block;
+        }
+
         .header-nav a {
-            color: rgba(255,255,255,0.7);
+            color: var(--text-light);
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
@@ -68,7 +77,7 @@
             transition: color 0.2s;
         }
 
-        .header-nav a:hover { color: var(--white); }
+        .header-nav a:hover { color: var(--primary); }
 
         /* === HERO === */
         .hero {
@@ -460,6 +469,8 @@
         }
 
         @media (max-width: 600px) {
+            .header { padding: 0 16px; }
+            .logo img { height: 36px; }
             .header { padding: 0 20px; }
             .header-nav a { margin-left: 16px; font-size: 13px; }
             .hero { padding: 60px 20px 50px; }
@@ -479,8 +490,8 @@
 
     <!-- HEADER -->
     <header class="header">
-        <a href="index.html" class="logo">
-            <img src="image_debitlog.jpg" alt="DEBITLOG" style="height: 50px; width: auto; display: block;">
+        <a href="index.html" class="logo" aria-label="DEBITLOG — Accueil">
+            <img src="logo.png" alt="DEBITLOG — Digital Management Solutions" width="226" height="56">
         </a>
         <nav class="header-nav">
             <a href="#outils">Outils</a>
@@ -493,8 +504,8 @@
     <section class="hero">
         <div class="hero-badge">⚡ Outils d'audit comptable nouvelle génération</div>
         <h1 class="hero-title">
-            Outils d'audit comptable<br><span>10x plus rapides</span><br>que les outils traditionnels
-        </h1>
+    Outils d'audit comptable<br><span>10x plus rapides</span><br>que les outils traditionnels
+</h1>
         <p class="hero-subtitle">
             Quatre outils pour retrouver le temps perdu sur le FEC, l'édition des échelles d'agios débiteurs, le lettrage des tiers et le rapprochement bancaire. Gratuit jusqu'au 31 décembre 2026.
         </p>
