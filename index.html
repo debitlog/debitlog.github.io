@@ -3,141 +3,462 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DEBITLOG — Outils d'audit comptable</title>
-<meta name="description" content="Quatre outils d'audit comptable, chacun dédié à une tâche précise : échelles d'agios débiteurs, contrôle du FEC, lettrage des tiers, rapprochement bancaire.">
+<title>DEBITLOG — Suite d'Outils d'Audit & Finance Déterministes</title>
+<meta name="description" content="Quatre outils d'audit comptable et financier indépendants : échelles d'agios débiteurs, contrôle du FEC, lettrage des tiers et rapprochement bancaire. Traitement local sans persistance.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <style>
-:root{
-  /* Nouvelle palette officielle flat design */
-  --blue:#0C2340; 
-  --blue-dark:#081729; 
-  --blue-soft:#e0f2fe; 
-  --teal:#0284C7;
-  --ink:#0C2340; 
-  --muted:#64748B; 
-  --rule:#e2e8f0;
-  --paper:#f8fafc; 
-  --white:#ffffff;
+:root {
+  --primary: #0C2340;
+  --primary-hover: #081729;
+  --accent: #0284C7;
+  --accent-soft: #F0F9FF;
+  --accent-border: #BAE6FD;
+  --ink: #0F172A;
+  --muted: #64748B;
+  --rule: #E2E8F0;
+  --paper: #F8FAFC;
+  --white: #FFFFFF;
+  --success-bg: #ECFDF5;
+  --success-text: #065F46;
+  --success-border: #A7F3D0;
+  --alert-bg: #FEF2F2;
+  --alert-text: #991B1B;
+  --radius: 12px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
-.skip{position:absolute;left:-999px;top:8px;background:var(--blue);color:#fff;padding:8px 14px;border-radius:6px;z-index:2000}
-.skip:focus{left:8px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--primary); color: #fff; padding: 8px 14px; border-radius: 6px; z-index: 2000; }
+.skip:focus { left: 8px; }
+.wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
 
 /* En-tête */
-.header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
-.header .wrap{height:76px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;text-decoration:none;line-height:0}
-.logo svg{height:42px;width:auto;display:block}
-.nav a{font-size:15px;font-weight:600;color:var(--muted);text-decoration:none;margin-left:28px;padding:6px 0;border-bottom:2px solid transparent;transition:color .15s, border-color .15s}
-.nav a:hover{color:var(--blue);border-bottom-color:var(--teal)}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.header .wrap {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo { display: flex; align-items: center; text-decoration: none; line-height: 0; }
+.logo svg { height: 42px; width: auto; display: block; }
+.nav { display: flex; align-items: center; gap: 28px; }
+.nav a {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.nav a:hover { color: var(--primary); }
+.btn-nav {
+  background: var(--primary);
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 13.5px;
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.btn-nav:hover { background: var(--accent); transform: translateY(-1px); }
 
-/* Hero */
-.hero{padding:88px 0 64px}
-.hero h1{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:clamp(34px,4.6vw,54px);line-height:1.08;letter-spacing:-.02em;max-width:15em;color:var(--blue)}
-.hero p{font-size:19px;color:var(--muted);max-width:36em;margin-top:22px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:32px}
-.btn{display:inline-block;background:var(--blue);color:#fff;font-weight:600;font-size:16px;text-decoration:none;padding:14px 26px;border-radius:8px;transition:background .15s}
-.btn:hover{background:var(--teal)}
-.hero-note{font-size:14px;color:var(--muted)}
+/* Hero Section */
+.hero { padding: 76px 0 60px; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.badge-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(36px, 4.2vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: 18.5px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 32px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15.5px;
+  text-decoration: none;
+  padding: 13px 26px;
+  border-radius: 8px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+.hero-guarantee {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.hero-guarantee svg { color: var(--accent); flex-shrink: 0; }
 
-/* Extrait de résultat */
-.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
-.sample{background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:20px 20px 8px;box-shadow:0 4px 16px rgba(12,35,64,.04)}
-.sample figcaption{font-size:14px;font-weight:700;line-height:1.4;padding-bottom:12px;border-bottom:2px solid var(--blue);color:var(--blue)}
-.sample figcaption span{font-weight:500;color:var(--muted);font-size:13px}
-.sample-scroll{overflow-x:auto}
-.sample table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;min-width:400px}
-.sample th,.sample td{padding:9px 6px;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
-.sample thead th{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px}
-.sample th:first-child,.sample td:first-child{text-align:left}
-.sample tfoot th{text-align:left;font-weight:600}
-.sample tfoot tr:first-child td,.sample tfoot tr:first-child th{border-top:2px solid var(--blue);font-weight:700}
-.sample tfoot .gap th,.sample tfoot .gap td{background:#ecfdf5;color:#065f46;font-weight:700;border-bottom:0}
+/* Carte d'Aperçu / Sample Ledger */
+.sample-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(12, 35, 64, 0.05);
+  overflow: hidden;
+}
+.sample-bar {
+  background: #F1F5F9;
+  border-bottom: 1px solid var(--rule);
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.sample-pill {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.sample-content { padding: 20px 20px 10px; overflow-x: auto; }
+.sample-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  min-width: 380px;
+}
+.sample-content th, .sample-content td {
+  padding: 10px 8px;
+  text-align: right;
+  border-bottom: 1px solid var(--rule);
+}
+.sample-content th:first-child, .sample-content td:first-child { text-align: left; }
+.sample-content thead th {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sample-content tfoot th { text-align: left; font-weight: 600; }
+.sample-content tfoot tr:first-child th, .sample-content tfoot tr:first-child td {
+  border-top: 2px solid var(--primary);
+  font-weight: 700;
+}
+.sample-content .gap th, .sample-content .gap td {
+  background: var(--alert-bg);
+  color: var(--alert-text);
+  font-weight: 700;
+  border-bottom: 0;
+}
 
-/* Journal des outils */
-.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:2px solid var(--blue);padding-bottom:12px}
-.section-head h2{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:30px;letter-spacing:-.01em;color:var(--blue)}
-.section-head span{font-size:14px;color:var(--muted)}
-.ledger{background:var(--white);border:1px solid var(--rule);border-top:0;border-radius:0 0 12px 12px;overflow:hidden}
-.row{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:24px;align-items:center;padding:26px 24px;border-bottom:1px solid var(--rule);transition:background .15s}
-.row:last-child{border-bottom:0}
-.row:hover{background:var(--paper)}
-.row h3{font-size:18px;font-weight:700;letter-spacing:-.01em;color:var(--blue)}
-.row .desc{font-size:14.5px;color:var(--muted);margin-top:4px}
-.io dt{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:0.5px}
-.io dd{font-size:14px;margin-top:2px;color:var(--ink)}
-.open{font-weight:600;font-size:14px;color:var(--blue);text-decoration:none;border:1.5px solid var(--blue);border-radius:8px;padding:9px 18px;white-space:nowrap;transition:all .15s ease}
-.open:hover{background:var(--blue);color:#fff}
+/* Section Outils */
+.tools-section { padding: 80px 0; }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 16px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.section-head h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 600;
+  font-size: 34px;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+}
+.section-head p { font-size: 15px; color: var(--muted); }
 
-/* Vos fichiers */
-.files{padding:88px 0 0}
-.files dl{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:0;border:1px solid var(--rule);border-top:0;border-radius:0 0 12px 12px;background:var(--white);overflow:hidden}
-.files .item{padding:26px 24px;border-right:1px solid var(--rule)}
-.files .item:last-child{border-right:0}
-.files dt{font-weight:700;font-size:16px;color:var(--blue)}
-.files dd{font-size:14.5px;color:var(--muted);margin-top:6px}
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 28px;
+}
+.tool-box {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(12, 35, 64, 0.02);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+.tool-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(12, 35, 64, 0.06);
+  border-color: var(--accent-border);
+}
+.tool-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+.tool-box h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.tool-box .desc {
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+.tool-pipeline {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pipeline-item { display: flex; font-size: 13.5px; }
+.pipeline-label {
+  width: 115px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 11.5px;
+  letter-spacing: 0.4px;
+}
+.pipeline-val {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 600;
+}
+.btn-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--white);
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.btn-open:hover { background: var(--primary); color: #fff; }
 
-/* Offre */
-.offer{padding:88px 0 0}
-.offer-box{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;background:var(--blue);color:#fff;border-radius:14px;padding:48px}
-.offer h2{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:34px;line-height:1.15;letter-spacing:-.01em}
-.offer .big{font-family:'Newsreader',Georgia,serif;font-size:64px;font-weight:600;line-height:1;margin:18px 0 14px;color:#38bdf8}
-.offer p{color:rgba(255,255,255,.8);font-size:16px}
-.offer ul{list-style:none;margin-top:18px}
-.offer li{padding:6px 0 6px 24px;position:relative;font-size:15px}
-.offer li::before{content:'';position:absolute;left:0;top:15px;width:8px;height:8px;border-radius:50%;background:#38bdf8}
-.form{background:var(--white);border-radius:10px;padding:12px;color:var(--ink);min-height:200px}
+/* Section Sécurité & Confidentialité */
+.secu-section { padding: 40px 0 80px; }
+.secu-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: 0 4px 16px rgba(12, 35, 64, 0.02);
+}
+.secu-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.secu-desc { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+.secu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.secu-item h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.secu-item p { font-size: 14px; color: var(--muted); line-height: 1.55; }
 
-/* Signature */
-.sign{padding:88px 0 72px;text-align:left}
-.sign p{font-family:'Newsreader',Georgia,serif;font-size:26px;font-weight:500;line-height:1.35;max-width:24em;color:var(--blue)}
+/* Section Offre 2027 */
+.offer-section { padding-bottom: 80px; }
+.offer-box {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 48px;
+  box-shadow: 0 10px 35px rgba(12, 35, 64, 0.12);
+}
+.offer-box h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 600;
+  font-size: 34px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.offer-box .big-discount {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 1;
+  margin: 18px 0 14px;
+  color: #38BDF8;
+}
+.offer-box p { color: rgba(255, 255, 255, 0.8); font-size: 15.5px; line-height: 1.5; }
+.offer-box ul { list-style: none; margin-top: 22px; display: flex; flex-direction: column; gap: 8px; }
+.offer-box li {
+  padding-left: 24px;
+  position: relative;
+  font-size: 14.5px;
+  color: #F1F5F9;
+}
+.offer-box li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38BDF8;
+}
+.form-container {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 16px;
+  color: var(--ink);
+  min-height: 320px;
+}
+
+/* Baseline Institutionnelle */
+.sign-section {
+  padding: 20px 0 80px;
+  border-bottom: 1px solid var(--rule);
+}
+.sign-section p {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--primary);
+  max-width: 26em;
+}
 
 /* Pied de page */
-.footer{background:var(--white);border-top:1px solid var(--rule);padding:36px 0;font-size:14px;color:var(--muted)}
-.footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.footer a{text-decoration:none;color:var(--blue);font-weight:600}
-.footer a:hover{text-decoration:underline;color:var(--teal)}
+.footer {
+  background: var(--white);
+  padding: 36px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { color: var(--muted); text-decoration: none; font-weight: 500; }
+.footer-links a:hover { color: var(--primary); }
 
-@media (max-width:900px){
-  .hero-grid{grid-template-columns:1fr;gap:36px}
-  .row{grid-template-columns:1fr 1fr;gap:16px 24px}
-  .row>div:first-child{grid-column:1/-1}
-  .row .open{grid-column:1/-1;text-align:center}
-  .files dl{grid-template-columns:1fr}
-  .files .item{border-right:0;border-bottom:1px solid var(--rule)}
-  .files .item:last-child{border-bottom:0}
-  .offer-box{grid-template-columns:1fr;padding:32px 22px;gap:28px}
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .tools-grid { grid-template-columns: 1fr; }
+  .secu-grid { grid-template-columns: 1fr; gap: 24px; }
+  .offer-box { grid-template-columns: 1fr; padding: 32px 24px; }
 }
-@media (max-width:600px){
-  .wrap{padding:0 18px}
-  .header .wrap{height:64px}
-  .logo svg{height:34px}
-  .nav a{margin-left:16px;font-size:14px}
-  .hero{padding:52px 0 44px}
-  .hero p{font-size:17px}
-  .sign p{font-size:21px}
+@media (max-width: 600px) {
+  .header .wrap { height: 64px; }
+  .logo svg { height: 34px; }
+  .nav a { display: none; }
+  .hero { padding: 48px 0 40px; }
+  .hero h1 { font-size: 32px; }
+  .hero p { font-size: 16.5px; }
+  .tool-box { padding: 22px; }
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 </style>
 </head>
 <body>
 <a class="skip" href="#outils">Aller aux outils</a>
 
+<!-- Navigation Header -->
 <header class="header">
   <div class="wrap">
     <a href="index.html" class="logo" aria-label="DEBITLOG, accueil">
-      <!-- Logo vectoriel SVG officiel (Flat Design) -->
+      <!-- Monogramme + Typographie SVG Flat Design Officiel -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 110" height="42" aria-hidden="true">
         <g transform="translate(5, 5)">
           <path d="M 0 0 L 52 0 C 78 0 100 22 100 50 C 100 78 78 100 52 100 L 0 100 Z M 22 22 L 22 78 L 48 78 C 64 78 76 66 76 50 C 76 34 64 22 48 22 Z" fill="#0C2340"/>
@@ -148,38 +469,89 @@ a{color:inherit}
       </svg>
     </a>
     <nav class="nav" aria-label="Navigation principale">
-      <a href="#outils">Outils</a>
-      <a href="#fichiers">Vos fichiers</a>
-      <a href="#offre">Offre</a>
+      <a href="#outils">Les 4 Outils</a>
+      <a href="#securite">Sécurité</a>
+      <a href="#offre">Offre 2027</a>
+      <a href="cgu.html">Conformité</a>
+      <a href="#outils" class="btn-nav">Choisir un outil</a>
     </nav>
   </div>
 </header>
 
 <main>
+<!-- Hero -->
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
+      <div class="badge-hero">Suite d'audit comptable &amp; financier</div>
       <h1>Des outils d'audit qui font une seule chose, et la font vite.</h1>
-      <p>Échelles d'agios débiteurs, contrôle du FEC, lettrage des tiers, rapprochement bancaire. Des calculs déterministes : mêmes données, mêmes résultats, détail exportable.</p>
+      <p>Échelles d'agios débiteurs, contrôle du FEC, lettrage des tiers et rapprochement bancaire. Des calculs déterministes : mêmes données, mêmes résultats, détail immédiatement exportable.</p>
       <div class="hero-actions">
-        <a href="#outils" class="btn">Choisir un outil</a>
-        <span class="hero-note">Gratuit jusqu'au 31 décembre 2026, sans compte.</span>
+        <a href="#outils" class="btn-primary">
+          <span>Accéder aux 4 outils</span>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+        <div class="hero-guarantee">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span>Gratuit jusqu'au 31/12/2026 · Sans compte</span>
+        </div>
       </div>
     </div>
-    <figure class="sample" aria-labelledby="sample-cap">
-      <figcaption id="sample-cap">Échelle d'agios débiteurs, exemple fictif<br><span>Taux 9,00 %, base 360 jours</span></figcaption>
-      <div class="sample-scroll">
+
+    <!-- Demonstration Ledger Card -->
+    <figure class="sample-card" aria-labelledby="sample-cap">
+      <div class="sample-bar">
+        <span>ÉCHELLE D'INTÉRÊTS DÉBITEURS</span>
+        <span class="sample-pill">Taux 9,00 % · Base 360</span>
+      </div>
+      <div class="sample-content">
         <table>
-          <thead><tr><th scope="col">Du</th><th scope="col">Jours</th><th scope="col">Solde débiteur</th><th scope="col">Nombres</th><th scope="col">Intérêts</th></tr></thead>
+          <thead>
+            <tr>
+              <th scope="col">Date Valeur</th>
+              <th scope="col">Jours</th>
+              <th scope="col">Solde Débiteur</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Intérêts</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>01/03</td><td>8</td><td>1 250 000</td><td>10 000 000</td><td>2 500,00</td></tr>
-            <tr><td>09/03</td><td>8</td><td>1 780 000</td><td>14 240 000</td><td>3 560,00</td></tr>
-            <tr><td>17/03</td><td>14</td><td>940 000</td><td>13 160 000</td><td>3 290,00</td></tr>
+            <tr>
+              <td>01/03/2026</td>
+              <td>8</td>
+              <td>1 250 000,00</td>
+              <td>10 000 000</td>
+              <td>2 500,00 DA</td>
+            </tr>
+            <tr>
+              <td>09/03/2026</td>
+              <td>8</td>
+              <td>1 780 000,00</td>
+              <td>14 240 000</td>
+              <td>3 560,00 DA</td>
+            </tr>
+            <tr>
+              <td>17/03/2026</td>
+              <td>14</td>
+              <td>940 000,00</td>
+              <td>13 160 000</td>
+              <td>3 290,00 DA</td>
+            </tr>
           </tbody>
           <tfoot>
-            <tr><th scope="row" colspan="3">Agios recalculés</th><td>37 400 000</td><td>9 350,00</td></tr>
-            <tr><th scope="row" colspan="4">Agios facturés par la banque</th><td>9 680,00</td></tr>
-            <tr class="gap"><th scope="row" colspan="4">Écart à justifier</th><td>330,00</td></tr>
+            <tr>
+              <th scope="row" colspan="3">Agios recalculés</th>
+              <td>37 400 000</td>
+              <td>9 350,00 DA</td>
+            </tr>
+            <tr>
+              <th scope="row" colspan="4">Agios facturés par la banque</th>
+              <td>9 680,00 DA</td>
+            </tr>
+            <tr class="gap">
+              <th scope="row" colspan="4">Écart détecté en faveur du client</th>
+              <td>-330,00 DA</td>
+            </tr>
           </tfoot>
         </table>
       </div>
@@ -187,102 +559,186 @@ a{color:inherit}
   </div>
 </section>
 
-<section id="outils">
+<!-- Section Les 4 Outils -->
+<section id="outils" class="tools-section">
   <div class="wrap">
     <div class="section-head">
-      <h2>Les quatre outils</h2>
-      <span>Ouvrez l'outil, déposez votre fichier, exportez le résultat.</span>
+      <div>
+        <h2>Les quatre outils</h2>
+        <p>Ouvrez l'outil dédié, déposez votre fichier de travail, exportez l'analyse certifiable.</p>
+      </div>
+      <span style="font-size:13px; color:var(--muted); font-weight:600;">Standard Audit &amp; Déontologie</span>
     </div>
-    <div class="ledger">
-      <article class="row">
+
+    <div class="tools-grid">
+      <!-- Outil 1 : Agios -->
+      <article class="tool-box">
         <div>
-          <h3>Échelles d'agios débiteurs</h3>
-          <p class="desc">Recalcule l'échelle d'intérêts et la compare à la facturation de la banque.</p>
+          <span class="tool-badge">Banque &amp; Crédit</span>
+          <h3>1. Échelles d'agios débiteurs</h3>
+          <p class="desc">Recalcul automatisé par dates de valeur de l'échelle d'intérêts et contrôle contradictoire des agios prélevés par la banque.</p>
+          <div class="tool-pipeline">
+            <div class="pipeline-item">
+              <span class="pipeline-label">Vous déposez :</span>
+              <span class="pipeline-val">Relevé de compte bancaire (Excel / CSV)</span>
+            </div>
+            <div class="pipeline-item">
+              <span class="pipeline-label">Vous obtenez :</span>
+              <span class="pipeline-val">Échelle d'intérêts, TAEG réel, ticket d'agios</span>
+            </div>
+          </div>
         </div>
-        <dl class="io"><dt>Vous déposez</dt><dd>Le relevé bancaire (Excel)</dd></dl>
-        <dl class="io"><dt>Vous obtenez</dt><dd>Échelle, ticket d'agios, TAEG, export Excel</dd></dl>
-        <a class="open" href="https://sofdev-api.onrender.com" aria-label="Ouvrir l'outil Échelles d'agios débiteurs">Ouvrir l'outil</a>
+        <a class="btn-open" href="https://sofdev-api.onrender.com" aria-label="Ouvrir l'outil Échelles d'agios débiteurs">
+          <span>Ouvrir l'outil d'audit des agios</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
       </article>
 
-      <article class="row">
+      <!-- Outil 2 : FEC -->
+      <article class="tool-box">
         <div>
-          <h3>Contrôle du FEC</h3>
-          <p class="desc">Repère les anomalies d'un Fichier des Écritures Comptables en quelques secondes.</p>
+          <span class="tool-badge">Fiscalité &amp; Conformité</span>
+          <h3>2. Contrôle du FEC</h3>
+          <p class="desc">Vérification de la structure légale du Fichier des Écritures Comptables, équilibre des écritures et séquentialité chronologique.</p>
+          <div class="tool-pipeline">
+            <div class="pipeline-item">
+              <span class="pipeline-label">Vous déposez :</span>
+              <span class="pipeline-val">Fichier FEC d'un exercice (.txt, .csv)</span>
+            </div>
+            <div class="pipeline-item">
+              <span class="pipeline-label">Vous obtenez :</span>
+              <span class="pipeline-val">Écritures déséquilibrées, anomalies, rapport</span>
+            </div>
+          </div>
         </div>
-        <dl class="io"><dt>Vous déposez</dt><dd>Le FEC d'un exercice</dd></dl>
-        <dl class="io"><dt>Vous obtenez</dt><dd>Écritures déséquilibrées, contrôle des tiers, rapport d'anomalies</dd></dl>
-        <a class="open" href="https://fecontrol.onrender.com" aria-label="Ouvrir l'outil Contrôle du FEC">Ouvrir l'outil</a>
+        <a class="btn-open" href="https://fecontrol.onrender.com" aria-label="Ouvrir l'outil Contrôle du FEC">
+          <span>Ouvrir l'outil Contrôle du FEC</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
       </article>
 
-      <article class="row">
+      <!-- Outil 3 : Lettrage -->
+      <article class="tool-box">
         <div>
-          <h3>Lettrage des tiers</h3>
-          <p class="desc">Lettre les comptes clients et fournisseurs par montant et libellé.</p>
+          <span class="tool-badge">Comptabilité Générale</span>
+          <h3>3. Lettrage des tiers</h3>
+          <p class="desc">Lettrage automatique déterministe par montants et libellés des comptes clients et fournisseurs pour apurer les comptes d'attente.</p>
+          <div class="tool-pipeline">
+            <div class="pipeline-item">
+              <span class="pipeline-label">Vous déposez :</span>
+              <span class="pipeline-val">Grand-livre auxiliaire des tiers (401 / 411)</span>
+            </div>
+            <div class="pipeline-item">
+              <span class="pipeline-label">Vous obtenez :</span>
+              <span class="pipeline-val">Grand-livre lettré, balance âgée résiduelle</span>
+            </div>
+          </div>
         </div>
-        <dl class="io"><dt>Vous déposez</dt><dd>Le grand livre des tiers</dd></dl>
-        <dl class="io"><dt>Vous obtenez</dt><dd>Écritures lettrées, écarts détectés, export des rapprochements</dd></dl>
-        <a class="open" href="https://lettragepro.onrender.com" aria-label="Ouvrir l'outil Lettrage des tiers">Ouvrir l'outil</a>
+        <a class="btn-open" href="https://lettragepro.onrender.com" aria-label="Ouvrir l'outil Lettrage des tiers">
+          <span>Ouvrir l'outil Lettrage des tiers</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
       </article>
 
-      <article class="row">
+      <!-- Outil 4 : Rapprochement -->
+      <article class="tool-box">
         <div>
-          <h3>Rapprochement bancaire</h3>
-          <p class="desc">Rapproche le grand livre de banque et le relevé, par montant et par date.</p>
+          <span class="tool-badge">Trésorerie &amp; Banque</span>
+          <h3>4. Rapprochement bancaire</h3>
+          <p class="desc">Croisement instantané entre le grand-livre de trésorerie (512) et le relevé bancaire, pointage par montant et date, isolation des suspens.</p>
+          <div class="tool-pipeline">
+            <div class="pipeline-item">
+              <span class="pipeline-label">Vous déposez :</span>
+              <span class="pipeline-val">Grand-livre 512 + Relevé bancaire (Excel)</span>
+            </div>
+            <div class="pipeline-item">
+              <span class="pipeline-label">Vous obtenez :</span>
+              <span class="pipeline-val">État de rapprochement équilibré &amp; écarts</span>
+            </div>
+          </div>
         </div>
-        <dl class="io"><dt>Vous déposez</dt><dd>Le grand livre et le relevé (Excel)</dd></dl>
-        <dl class="io"><dt>Vous obtenez</dt><dd>État de rapprochement et écarts à justifier</dd></dl>
-        <a class="open" href="rapprochement.html" aria-label="Ouvrir l'outil Rapprochement bancaire">Ouvrir l'outil</a>
+        <a class="btn-open" href="rapprochement.html" aria-label="Ouvrir l'outil Rapprochement bancaire">
+          <span>Ouvrir le module Rapprochement</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
       </article>
     </div>
   </div>
 </section>
 
-<section class="files" id="fichiers">
+<!-- Section Sécurité & Confidentialité -->
+<section id="securite" class="secu-section">
   <div class="wrap">
-    <div class="section-head">
-      <h2>Ce qui arrive à vos fichiers</h2>
-      <span>Le secret professionnel guide chaque choix.</span>
+    <div class="secu-card">
+      <h2 class="secu-title">Ce qui arrive à vos fichiers financiers</h2>
+      <p class="secu-desc">Le secret professionnel et la sécurité des données des entreprises guident chaque décision technique.</p>
+      
+      <div class="secu-grid">
+        <div class="secu-item">
+          <h4>
+            <svg width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span>Chiffrement TLS 1.3</span>
+          </h4>
+          <p>Tous les flux et chargements d'outils transitent par des canaux sécurisés de grade bancaire avec chiffrement HTTPS obligatoire.</p>
+        </div>
+        <div class="secu-item">
+          <h4>
+            <svg width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+            <span>Traitement en mémoire vive</span>
+          </h4>
+          <p>Le calcul s'exécute directement dans le navigateur ou en mémoire volatile isolée. Aucune base de données permanente ne stocke vos écritures.</p>
+        </div>
+        <div class="secu-item">
+          <h4>
+            <svg width="20" height="20" fill="none" stroke="var(--accent)" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            <span>Purge automatique</span>
+          </h4>
+          <p>Dès la fin de l'exportation ou la fermeture de l'onglet, vos relevés et balances disparaissent. Zéro conservation, zéro revente de données.</p>
+        </div>
+      </div>
     </div>
-    <dl>
-      <div class="item"><dt>Envoyés chiffrés</dt><dd>Les échanges avec les outils passent en HTTPS.</dd></div>
-      <div class="item"><dt>Aucun compte</dt><dd>Aucune inscription n'est demandée pour utiliser les outils.</dd></div>
-      <div class="item"><dt>Supprimés après 2 heures</dt><dd>Le fichier est hébergé à Francfort (Allemagne), puis supprimé automatiquement.</dd></div>
-    </dl>
   </div>
 </section>
 
-<section class="offer" id="offre">
+<!-- Section Offre 2027 (Founding User) -->
+<section id="offre" class="offer-section">
   <div class="wrap">
     <div class="offer-box">
       <div>
         <h2>Founding User : -30 % sur 2027</h2>
-        <div class="big">-30 %</div>
-        <p>Inscrivez-vous avant le 31 décembre 2026 pour garder un tarif préférentiel sur votre première année payante.</p>
+        <div class="big-discount">-30 %</div>
+        <p>Inscrivez votre cabinet ou direction financière avant le 31 décembre 2026 pour bloquer un tarif préférentiel garanti sur l'ensemble des modules payants futurs.</p>
         <ul>
-          <li>Accès gratuit à toutes les fonctionnalités jusqu'au 31/12/2026</li>
-          <li>-30 % sur toute l'année 2027</li>
-          <li>Tarif préférentiel garanti</li>
+          <li>Accès 100 % gratuit à tous les outils actuels jusqu'au 31/12/2026</li>
+          <li>-30 % garanti sur toute l'année 2027</li>
+          <li>Priorité sur les nouveaux connecteurs de fichiers et modules d'audit</li>
         </ul>
       </div>
-      <div class="form">
+      <div class="form-container">
         <iframe data-tally-src="https://tally.so/embed/jaNWk4?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="314" frameborder="0" marginheight="0" marginwidth="0" title="DEBITLOG — Founding User"></iframe>
-        <p style="font-size:13.5px;color:var(--muted);margin-top:8px">Le formulaire ne s'affiche pas ? <a href="https://tally.so/r/jaNWk4" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600">Ouvrez-le dans un nouvel onglet</a>.</p>
+        <p style="font-size:13px; color:var(--muted); margin-top:8px;">Le formulaire ne s'affiche pas ? <a href="https://tally.so/r/jaNWk4" target="_blank" rel="noopener" style="color:var(--accent); font-weight:600;">Ouvrez-le dans un nouvel onglet</a>.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sign">
+<!-- Baseline Institutionnelle -->
+<section class="sign-section">
   <div class="wrap">
     <p>Pensé pour les métiers de la comptabilité et de la finance, par des professionnels du secteur.</p>
   </div>
 </section>
 </main>
 
+<!-- Footer -->
 <footer class="footer">
   <div class="wrap">
-    <span>© 2026 DEBITLOG — Solutions de gestion. Tous droits réservés.</span>
-    <span><a href="cgu.html">CGU</a> <a href="mailto:debitlog@proton.me">debitlog@proton.me</a></span>
+    <span>© 2026 DEBITLOG — Solutions d'audit et de gestion. Tous droits réservés.</span>
+    <div class="footer-links">
+      <a href="#outils">Outils</a>
+      <a href="cgu.html">CGU &amp; Confidentialité</a>
+      <a href="mailto:debitlog@proton.me">Contact : debitlog@proton.me</a>
+    </div>
   </div>
 </footer>
 
