@@ -3,94 +3,327 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conditions générales d'utilisation — DEBITLOG</title>
-<meta name="description" content="Conditions générales d'utilisation de la suite d'outils DEBITLOG : traitement local des fichiers, données personnelles, gratuité et responsabilité.">
+<title>Conditions Générales d'Utilisation & Confidentialité — DEBITLOG</title>
+<meta name="description" content="Conditions générales d'utilisation et engagements de confidentialité de la suite DEBITLOG : traitement local, secret professionnel et conformité juridique.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="256x256" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <style>
-:root{
-  --blue:#0C2340;
-  --blue-dark:#081729;
-  --blue-soft:#e0f2fe;
-  --teal:#0284C7;
-  --ink:#0C2340;
-  --muted:#64748B;
-  --rule:#e2e8f0;
-  --paper:#f8fafc;
-  --white:#ffffff;
+:root {
+  --primary: #0C2340;
+  --primary-hover: #081729;
+  --accent: #0284C7;
+  --accent-soft: #F0F9FF;
+  --accent-border: #BAE6FD;
+  --ink: #0F172A;
+  --muted: #64748B;
+  --rule: #E2E8F0;
+  --paper: #F8FAFC;
+  --white: #FFFFFF;
+  --success-bg: #ECFDF5;
+  --success-text: #065F46;
+  --success-border: #A7F3D0;
+  --radius: 10px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
-a{color:var(--teal);font-weight:600;text-decoration:none}
-a:hover{text-decoration:underline;color:var(--blue)}
-:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:4px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
-/* En-tête */
-.header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
-.header .wrap{height:76px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;text-decoration:none;line-height:0}
-.logo svg{height:42px;width:auto;display:block}
-.nav a{font-size:15px;font-weight:600;color:var(--muted);text-decoration:none;margin-left:28px;padding:6px 0;border-bottom:2px solid transparent;transition:color .15s, border-color .15s}
-.nav a:hover{color:var(--blue);border-bottom-color:var(--teal);text-decoration:none}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header sticky */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.header .wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo { display: flex; align-items: center; text-decoration: none; line-height: 0; }
+.logo svg { height: 40px; width: auto; }
+.nav { display: flex; align-items: center; gap: 24px; }
+.nav a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.nav a:hover { color: var(--primary); }
+.btn-header {
+  background: var(--primary);
+  color: #fff !important;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px !important;
+}
+.btn-header:hover { background: var(--accent) !important; }
 
 /* Hero */
-.hero{padding:64px 0 32px}
-.hero h1{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:clamp(34px,4.6vw,54px);line-height:1.08;letter-spacing:-.02em;color:var(--blue)}
-.meta{font-size:14px;color:var(--muted);margin-top:14px}
-.doc{max-width:760px;padding-bottom:72px}
+.hero {
+  background: var(--white);
+  border-bottom: 1px solid var(--rule);
+  padding: 56px 0 44px;
+}
+.hero-wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.badge-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: clamp(34px, 4vw, 48px);
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
 
-/* Encadré résumé */
-.summary{background:var(--white);border:1px solid var(--rule);border-left:4px solid var(--teal);border-radius:0 8px 8px 0;padding:20px 24px;margin:12px 0 24px;box-shadow:0 4px 16px rgba(12,35,64,.03)}
-.summary h2{font-family:'Newsreader',Georgia,serif;font-size:22px;font-weight:600;margin:0 0 10px;color:var(--blue)}
-.summary ul{list-style:none;margin:0}
-.summary li{padding:4px 0 4px 20px;position:relative;font-size:15px}
-.summary li::before{content:'';position:absolute;left:2px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--teal)}
+/* Main layout 2 colonnes */
+.main-wrap {
+  max-width: 1140px;
+  margin: 40px auto 80px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 56px;
+  align-items: start;
+}
 
-/* Articles juridiques */
-article{border-top:1px solid var(--rule);padding:28px 0 4px;margin-top:28px}
-article:first-of-type{margin-top:32px}
-h2{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:26px;letter-spacing:-.01em;margin-bottom:14px;color:var(--blue)}
-h2 .n{color:var(--teal);margin-right:8px}
-p{font-size:16px;margin-bottom:14px}
-ul.list{list-style:none;margin:6px 0 16px}
-ul.list li{position:relative;padding:3px 0 3px 22px;font-size:16px}
-ul.list li::before{content:'';position:absolute;left:3px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--teal)}
-strong{font-weight:600;color:var(--blue)}
-.notice{background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:0 6px 6px 0;padding:14px 18px;margin:16px 0;font-size:15px;color:var(--blue)}
-.notice p{margin:0;font-size:15px}
+/* Sidebar Navigation (TOC) */
+.toc-sidebar {
+  position: sticky;
+  top: 106px;
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(12, 35, 64, 0.02);
+}
+.toc-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.toc-nav { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.toc-nav a {
+  font-size: 13.5px;
+  color: var(--muted);
+  text-decoration: none;
+  display: block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  line-height: 1.4;
+}
+.toc-nav a:hover {
+  background: var(--paper);
+  color: var(--primary);
+}
+.toc-contact {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-size: 12px;
+  color: var(--muted);
+}
+.toc-contact a { color: var(--accent); font-weight: 600; text-decoration: none; }
 
-/* Pied de page */
-.footer{background:var(--white);border-top:1px solid var(--rule);padding:36px 0;font-size:14px;color:var(--muted)}
-.footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.footer a{text-decoration:none;color:var(--blue);font-weight:600;margin-left:16px}
-.footer a:first-child{margin-left:0}
-.footer a:hover{text-decoration:underline;color:var(--teal)}
+/* Contenu des articles */
+.content { min-width: 0; }
 
-@media (max-width:700px){
-  .wrap{padding:0 18px}
-  .header .wrap{height:64px}
-  .logo svg{height:34px}
-  .nav a{margin-left:14px;font-size:14px}
-  .hero{padding:44px 0 24px}
-  h2{font-size:23px}
-  p,ul.list li{font-size:15.5px}
+/* Carte Synthèse de conformité */
+.summary-card {
+  background: var(--white);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 36px;
+  box-shadow: 0 4px 20px rgba(2, 132, 199, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+.summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--accent);
+}
+.summary-card h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.summary-point {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.summary-point svg { flex-shrink: 0; margin-top: 2px; color: var(--accent); }
+
+/* Articles individuels */
+.legal-card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(12, 35, 64, 0.02);
+}
+.legal-card h2 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.article-badge {
+  background: var(--paper);
+  color: var(--accent);
+  border: 1px solid var(--rule);
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+.legal-card p {
+  font-size: 15px;
+  color: #334155;
+  margin-bottom: 14px;
+}
+.legal-card p:last-child { margin-bottom: 0; }
+.legal-card ul {
+  list-style: none;
+  margin: 12px 0 16px;
+}
+.legal-card li {
+  position: relative;
+  padding: 6px 0 6px 24px;
+  font-size: 14.5px;
+  color: #334155;
+}
+.legal-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 13px;
+}
+.legal-highlight {
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--primary);
+}
+.legal-highlight strong { color: var(--accent); }
+
+/* Footer */
+.footer {
+  background: var(--white);
+  border-top: 1px solid var(--rule);
+  padding: 36px 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.footer .wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { color: var(--muted); text-decoration: none; font-weight: 500; }
+.footer-links a:hover { color: var(--primary); }
+
+@media (max-width: 900px) {
+  .main-wrap { grid-template-columns: 1fr; gap: 32px; }
+  .toc-sidebar { display: none; }
+  .summary-grid { grid-template-columns: 1fr; }
+  .legal-card { padding: 24px; }
 }
 </style>
 </head>
 <body>
 
+<!-- En-tête -->
 <header class="header">
   <div class="wrap">
     <a href="index.html" class="logo" aria-label="DEBITLOG, accueil">
-      <!-- Logo vectoriel SVG officiel (Flat Design) -->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 110" height="42" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 110" height="38" aria-hidden="true">
         <g transform="translate(5, 5)">
           <path d="M 0 0 L 52 0 C 78 0 100 22 100 50 C 100 78 78 100 52 100 L 0 100 Z M 22 22 L 22 78 L 48 78 C 64 78 76 66 76 50 C 76 34 64 22 48 22 Z" fill="#0C2340"/>
           <path d="M 36 22 L 56 22 L 56 62 L 80 62 L 94 78 L 36 78 Z" fill="#0284C7"/>
@@ -99,102 +332,172 @@ strong{font-weight:600;color:var(--blue)}
         <text x="138" y="94" font-family="'Instrument Sans', system-ui, sans-serif" font-size="14.5" font-weight="700" letter-spacing="4.5" fill="#64748B">OUTILS D'AUDIT &amp; FINANCE</text>
       </svg>
     </a>
-    <nav class="nav" aria-label="Navigation principale">
+    <nav class="nav">
       <a href="index.html#outils">Outils</a>
-      <a href="index.html#fichiers">Vos fichiers</a>
-      <a href="mailto:debitlog@proton.me">Contact</a>
+      <a href="index.html#fichiers">Sécurité</a>
+      <a href="index.html" class="btn-header">Accéder à la suite</a>
     </nav>
   </div>
 </header>
 
-<main>
+<!-- Hero Section -->
 <section class="hero">
-  <div class="wrap">
-    <h1>Conditions générales d'utilisation</h1>
-    <p class="meta">Dernière mise à jour : octobre 2026. Version 1.0.</p>
+  <div class="hero-wrap">
+    <div class="badge-category">Centre Juridique &amp; Conformité</div>
+    <h1>Conditions Générales d'Utilisation</h1>
+    <div class="hero-meta">
+      <span>⚖️ Version officielle 1.0</span>
+      <span>📅 Entrée en vigueur : Octobre 2026</span>
+      <span>🔒 Traitement confidentiel garanti</span>
+    </div>
   </div>
 </section>
 
-<div class="wrap doc">
+<!-- Main Container 2 colonnes -->
+<div class="main-wrap">
 
-  <div class="summary">
-    <h2>L'essentiel sur vos fichiers</h2>
-    <ul>
-      <li>Le fichier que vous déposez est traité directement dans votre navigateur (côté client).</li>
-      <li>Il n'est jamais envoyé à un serveur externe pour ce service.</li>
-      <li>Le résultat est généré localement et téléchargeable immédiatement.</li>
-      <li>Nous ne demandons aucun compte, ni email, pour utiliser cet outil.</li>
+  <!-- Sidebar Sticky TOC -->
+  <aside class="toc-sidebar" aria-label="Sommaire des conditions">
+    <div class="toc-title">Sommaire des articles</div>
+    <ul class="toc-nav">
+      <li><a href="#synthese">Synthèse pour l'auditeur</a></li>
+      <li><a href="#art1">1. Éditeur de la suite</a></li>
+      <li><a href="#art2">2. Objet des services</a></li>
+      <li><a href="#art3">3. Traitement local des fichiers</a></li>
+      <li><a href="#art4">4. Données personnelles</a></li>
+      <li><a href="#art5">5. Vos droits (RGPD / Données)</a></li>
+      <li><a href="#art6">6. Modalités &amp; Gratuité 2026</a></li>
+      <li><a href="#art7">7. Responsabilité d'audit</a></li>
+      <li><a href="#art8">8. Propriété intellectuelle</a></li>
+      <li><a href="#art9">9. Droit &amp; Compétence</a></li>
     </ul>
-  </div>
+    <div class="toc-contact">
+      Questions relatives aux données :<br>
+      <a href="mailto:debitlog@proton.me">debitlog@proton.me</a>
+    </div>
+  </aside>
 
-  <article id="editeur">
-    <h2><span class="n">1.</span>Éditeur du service</h2>
-    <p>La suite d'outils <strong>DEBITLOG</strong> et son service de rapprochement bancaire sont édités par Sofiane, Alger, Algérie.</p>
-    <p>Contact : <a href="mailto:debitlog@proton.me">debitlog@proton.me</a>.</p>
-    <p>Hébergeur : GitHub Pages (site statique, aucun traitement serveur).</p>
-  </article>
+  <!-- Content Section -->
+  <main class="content">
 
-  <article id="objet">
-    <h2><span class="n">2.</span>Objet du service</h2>
-    <p>DEBITLOG propose des outils d'audit financier et de rapprochement entre un grand-livre de banque et un relevé bancaire, par montant et par libellé, avec affichage des écarts à justifier.</p>
-    <p>L'utilisation du service implique l'acceptation pleine et entière des présentes conditions.</p>
-  </article>
+    <!-- Synthèse Visuelle -->
+    <section class="summary-card" id="synthese">
+      <h2>L'essentiel sur vos fichiers financiers</h2>
+      <p style="font-size:14.5px; color:#475569;">
+        Les outils DEBITLOG sont conçus pour répondre aux obligations strictes de secret professionnel des experts-comptables et commissaires aux comptes.
+      </p>
+      <div class="summary-grid">
+        <div class="summary-point">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span><strong>Exécution locale :</strong> Les fichiers importés sont analysés directement en mémoire vive dans votre navigateur.</span>
+        </div>
+        <div class="summary-point">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span><strong>Zéro transfert cloud :</strong> Aucune copie de vos balances ou grands-livres ne transite vers des serveurs tiers.</span>
+        </div>
+        <div class="summary-point">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span><strong>Exportation immédiate :</strong> Les résultats (feuilles d'écarts, échelles d'intérêts) sont produits instantanément.</span>
+        </div>
+        <div class="summary-point">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span><strong>Zéro inscription :</strong> Aucun identifiant, mot de passe ou email requis pour démarrer vos contrôles.</span>
+        </div>
+      </div>
+    </section>
 
-  <article id="fichiers">
-    <h2><span class="n">3.</span>Fichiers déposés</h2>
-    <p>Les fichiers que vous importez (grand-livre, relevés bancaires) peuvent contenir des données financières et personnelles de tiers. Pour ces données, <strong>vous êtes responsable du traitement</strong>.</p>
-    <p>Fonctionnement technique :</p>
-    <ul class="list">
-      <li>Le traitement s'effectue <strong>entièrement dans votre navigateur</strong>, côté client.</li>
-      <li>Aucun fichier n'est envoyé à un serveur distant pour ce service.</li>
-      <li>Aucune donnée n'est stockée, ni temporairement, ni définitivement.</li>
-      <li>Le résultat est généré localement et téléchargeable immédiatement.</li>
-    </ul>
-    <p>Il vous appartient de ne déposer que les données nécessaires, et de les anonymiser ou de les réduire lorsque c'est possible. Vous restez tenu à vos obligations de secret professionnel et de protection des données vis-à-vis de vos propres clients.</p>
-  </article>
+    <!-- Article 1 -->
+    <article class="legal-card" id="art1">
+      <h2><span class="article-badge">01</span> Éditeur du service</h2>
+      <p>La suite logicielle et les services en ligne <strong>DEBITLOG</strong> sont développés et édités par Sofiane, domicilié à Alger, Algérie.</p>
+      <p><strong>Contact officiel :</strong> <a href="mailto:debitlog@proton.me" style="color:var(--accent); font-weight:600;">debitlog@proton.me</a></p>
+      <p><strong>Hébergement de l'infrastructure statique :</strong> GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA 94107, États-Unis).</p>
+    </article>
 
-  <article id="donnees">
-    <h2><span class="n">4.</span>Données personnelles collectées</h2>
-    <p><strong>Aucune donnée n'est collectée par ce service.</strong> Le traitement est local, aucune information n'est transmise ni conservée.</p>
-    <p><strong>Hébergement.</strong> Le site statique est hébergé sur GitHub Pages. GitHub peut conserver des journaux techniques de connexion (adresse IP, date et heure) pour la sécurité de sa plateforme. Consultez la politique de confidentialité de GitHub pour plus d'informations.</p>
-  </article>
+    <!-- Article 2 -->
+    <article class="legal-card" id="art2">
+      <h2><span class="article-badge">02</span> Objet du service</h2>
+      <p>DEBITLOG met à disposition des professionnels du chiffre (experts-comptables, auditeurs légaux, directeurs financiers, contrôleurs de gestion) des micro-outils d'audit spécialisés :</p>
+      <ul>
+        <li>Contrôle et recalcul d'échelles d'agios bancaires débiteurs et TAEG réels.</li>
+        <li>Analyse de structure et de validité de Fichiers des Écritures Comptables (FEC).</li>
+        <li>Lettrage algorithmique des balances auxiliaires tiers (clients et fournisseurs).</li>
+        <li>Rapprochement automatisé entre grand-livre de trésorerie (512) et relevés de compte.</li>
+      </ul>
+      <p>L'accès et l'utilisation de la plateforme emportent acceptation expresse et sans réserve des présentes conditions.</p>
+    </article>
 
-  <article id="droits">
-    <h2><span class="n">5.</span>Vos droits</h2>
-    <p>Puisque ce service ne collecte aucune donnée, les droits d'accès, de rectification et d'effacement ne s'appliquent pas directement à ce service. Pour toute question, écrivez à <a href="mailto:debitlog@proton.me">debitlog@proton.me</a>.</p>
-    <p>Vous pouvez aussi introduire une réclamation auprès de l'autorité compétente de protection des données.</p>
-  </article>
+    <!-- Article 3 -->
+    <article class="legal-card" id="art3">
+      <h2><span class="article-badge">03</span> Traitement et sécurité des fichiers déposés</h2>
+      <p>Les fichiers importés (relevés bancaires, extraits de grand-livre, FEC) contiennent des données sensibles et confidentielles relevant du secret des affaires et du secret professionnel :</p>
+      <div class="legal-highlight">
+        <strong>Architecture Client-Side (Locale) :</strong> L'ensemble des calculs, croisements de clés et rapprochements s'exécute dans la mémoire vive (*RAM*) du navigateur de votre machine de travail. Aucun fichier source n'est sauvegardé sur une base de données distante.
+      </div>
+      <ul>
+        <li>Le transfert d'accès s'effectue exclusivement au moyen de protocoles chiffrés de haute sécurité (HTTPS / TLS 1.3).</li>
+        <li>La clôture de l'onglet de navigation purge immédiatement toutes les données temporaires chargées en mémoire.</li>
+        <li>Il incombe à l'utilisateur de veiller à la conformité des données importées avec ses obligations légales propres de discrétion professionnelle.</li>
+      </ul>
+    </article>
 
-  <article id="gratuite">
-    <h2><span class="n">6.</span>Gratuité et évolution du service</h2>
-    <p>Les outils sont gratuits jusqu'au 31 décembre 2026. À compter du 1<sup>er</sup> janvier 2027, tout ou partie du service pourra devenir payant.</p>
-    <p>Toute modification substantielle des conditions d'accès sera annoncée avec un préavis raisonnable. L'usage gratuit du service ne confère aucun droit acquis à la gratuité des versions futures.</p>
-  </article>
+    <!-- Article 4 -->
+    <article class="legal-card" id="art4">
+      <h2><span class="article-badge">04</span> Données personnelles et télémétrie</h2>
+      <p><strong>Principe de minimisation absolue :</strong> DEBITLOG ne commercialise, ne collecte et n'enregistre aucune donnée à caractère personnel lors de l'usage des outils d'audit.</p>
+      <p><strong>Journaux d'hébergement :</strong> À des fins exclusives de sécurité et de prévention des attaques par déni de service (DDoS), l'hébergeur technique GitHub Pages peut recueillir des logs réseau standardisés (adresse IP d'origine, date et horodatage de requête).</p>
+    </article>
 
-  <article id="responsabilite">
-    <h2><span class="n">7.</span>Responsabilité</h2>
-    <p>DEBITLOG est un ensemble d'outils d'aide à la vérification et à l'audit. Il appartient à l'utilisateur de contrôler les résultats avant toute utilisation contractuelle, fiscale ou judiciaire.</p>
-    <p>Les résultats ne constituent pas un conseil juridique, fiscal ou financier. Dans les limites permises par la loi, l'Éditeur n'est pas responsable des conséquences d'une erreur d'interprétation, ni d'un préjudice financier découlant de l'usage des fichiers générés.</p>
-    <p>Le service est fourni sans garantie de disponibilité continue.</p>
-  </article>
+    <!-- Article 5 -->
+    <article class="legal-card" id="art5">
+      <h2><span class="article-badge">05</span> Droits des utilisateurs</h2>
+      <p>En l'absence de base de données d'utilisateurs ou d'historique de traitement, DEBITLOG ne détient aucun fichier nominatif susceptible de faire l'objet d'une demande de rectification ou d'effacement.</p>
+      <p>Pour toute question relative aux protocoles techniques mis en œuvre, l'utilisateur peut contacter l'éditeur à <a href="mailto:debitlog@proton.me" style="color:var(--accent); font-weight:600;">debitlog@proton.me</a>.</p>
+    </article>
 
-  <article id="propriete">
-    <h2><span class="n">8.</span>Propriété intellectuelle</h2>
-    <p>Le code de l'interface, la marque DEBITLOG et les algorithmes de rapprochement sont la propriété exclusive de l'Éditeur. Toute reproduction, modification ou distribution non autorisée, notamment à des fins commerciales, est interdite.</p>
-  </article>
+    <!-- Article 6 -->
+    <article class="legal-card" id="art6">
+      <h2><span class="article-badge">06</span> Gratuité et évolution contractuelle</h2>
+      <p>L'accès à l'intégralité des outils DEBITLOG est proposé à titre entièrement gracieux jusqu'au <strong>31 décembre 2026</strong>, sans limitation de volumétrie raisonnable.</p>
+      <p>À compter du 1<sup>er</sup> janvier 2027, des abonnements ou formules de souscription professionnelle pourront être introduits. Les utilisateurs inscrits au programme <em>Founding User</em> conserveront le bénéfice d'un tarif préférentiel garanti sur l'exercice 2027 conformément aux modalités annoncées sur le site.</p>
+    </article>
 
-  <article id="droit">
-    <h2><span class="n">9.</span>Droit applicable</h2>
-    <p>Les présentes conditions sont régies par le droit algérien. Sous réserve des règles impératives de protection des données applicables aux utilisateurs européens, tout litige non résolu à l'amiable relève du Tribunal d'Alger.</p>
-  </article>
+    <!-- Article 7 -->
+    <article class="legal-card" id="art7">
+      <h2><span class="article-badge">07</span> Responsabilité et nature des travaux</h2>
+      <p>Les outils DEBITLOG constituent des <strong>instruments techniques d'assistance au calcul et à la détection d'écarts</strong>. Ils ne se substituent en aucun cas au jugement critique, à la diligence d'audit et aux obligations légales de l'expert-comptable ou du commissaire aux comptes.</p>
+      <div class="legal-highlight">
+        <strong>Absence de conseil :</strong> Les résultats exportés (échelles d'agios, feuilles de lettrage, contrôles de FEC) ne valent ni certification légale, ni consultation juridique ou fiscale. L'utilisateur demeure seul responsable des conclusions d'audit et des écritures comptables enregistrées sur la base de ces calculs.
+      </div>
+    </article>
 
+    <!-- Article 8 -->
+    <article class="legal-card" id="art8">
+      <h2><span class="article-badge">08</span> Propriété intellectuelle</h2>
+      <p>La marque <strong>DEBITLOG</strong>, le monogramme vectoriel « DL », la structure ergonomique du site et les moteurs algorithmiques de calcul sont la propriété exclusive de l'Éditeur.</p>
+      <p>Toute extraction substantielle, ingénierie inverse (*reverse engineering*) ou reproduction du code source à des fins de rediffusion commerciale sans autorisation écrite préalable est strictement interdite.</p>
+    </article>
+
+    <!-- Article 9 -->
+    <article class="legal-card" id="art9">
+      <h2><span class="article-badge">09</span> Droit applicable et juridiction compétente</h2>
+      <p>Les présentes Conditions Générales d'Utilisation sont régies et interprétées conformément au <strong>droit algérien</strong>.</p>
+      <p>En cas de différend relatif à l'interprétation ou à l'exécution des présentes, et à défaut d'accord amiable intervenu dans un délai de trente (30) jours, compétence expresse est attribuée aux tribunaux compétents du ressort du <strong>Tribunal d'Alger</strong>.</p>
+    </article>
+
+  </main>
 </div>
-</main>
 
+<!-- Pied de page officiel -->
 <footer class="footer">
   <div class="wrap">
-    <span>© 2026 DEBITLOG — Solutions de gestion. Tous droits réservés.</span>
-    <span><a href="index.html">Accueil</a><a href="cgu.html">CGU</a><a href="mailto:debitlog@proton.me">Contact</a></span>
+    <span>© 2026 DEBITLOG — Outils professionnels d'audit et de finance.</span>
+    <div class="footer-links">
+      <a href="index.html">Accueil</a>
+      <a href="index.html#outils">Outils</a>
+      <a href="cgu.html">CGU &amp; Confidentialité</a>
+      <a href="mailto:debitlog@proton.me">Contact</a>
+    </div>
   </div>
 </footer>
 
